@@ -156,7 +156,7 @@ def update_link_data(cursor,data_item,TABLE_NAME):
             # 更新文本内容的SQL语句模板
             content_column = 'calib_lidar_to_camera'
             update_text_content = f"UPDATE {TABLE_NAME} SET {content_column}=%s WHERE id=%s"
-            #print("calib_camera_intrinsic content:",content)
+            #print("calib_lidar_to_camera content:",content)
             cursor.execute(update_text_content,(content,item_id))
             #print(f"file Id: {item_id} saved successfully")
 
@@ -167,7 +167,7 @@ def update_link_data(cursor,data_item,TABLE_NAME):
             # 更新文本内容的SQL语句模板
             content_column = 'label_camera_std'
             update_text_content = f"UPDATE {TABLE_NAME} SET {content_column}=%s WHERE id=%s"
-            #print("calib_camera_intrinsic content:",content)
+            #print("label_camera_std content:",content)
             cursor.execute(update_text_content,(content,item_id))
             #print(f"file Id: {item_id} saved successfully")
 
@@ -178,7 +178,7 @@ def update_link_data(cursor,data_item,TABLE_NAME):
             # 更新文本内容的SQL语句模板
             content_column = 'label_lidar_std'
             update_text_content = f"UPDATE {TABLE_NAME} SET {content_column}=%s WHERE id=%s"
-            #print("calib_camera_intrinsic content:",content)
+            #print("label_lidar_std content:",content)
             cursor.execute(update_text_content,(content,item_id))
             print(f"file Id: {item_id} saved successfully")
 
