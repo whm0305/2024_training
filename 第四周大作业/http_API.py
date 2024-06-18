@@ -43,9 +43,9 @@ def query_data(image_name: str, db: Session = Depends(get_db)):
     # 统一路径格式
     image_path = f'image/{image_name}.jpg'
     # sql语句
-    stmt = select([table]).where(table.c.image_path == image_path)
+    sql = select([table]).where(table.c.image_path == image_path)
     # 从数据库获取
-    db_result = db.execute(stmt).first()
+    db_result = db.execute(sql).first()
     if not db_result:
             raise HTTPException(status_code=404, detail=f"Image {image_name} not found in the database")
     return db_result
