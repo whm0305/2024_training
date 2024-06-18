@@ -27,7 +27,7 @@ from mysql.connector import Error
 host = 'localhost'
 port = '3307'
 user = 'root'
-password = '200133'
+password = ''
 database = 'whm_database'
 
 # 表
