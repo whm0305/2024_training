@@ -11,7 +11,7 @@ app = FastAPI()
 # 表
 TABLE_NAME = 'data_info_table'
 # 数据库配置
-DATABASE_URL = "mysql+pymysql://root:200133@localhost:3307/whm_database"
+DATABASE_URL = "mysql+pymysql://root:password@localhost:3307/whm_database"
 
 # 创建SQLAlchemy引擎
 engine = create_engine(DATABASE_URL)
