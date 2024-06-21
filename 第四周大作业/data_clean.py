@@ -138,7 +138,7 @@ def update_link_data(cursor,data_item,TABLE_NAME):
         print("数据项中未找到'id' 键")
         return
 
-    # 处理文件路径
+    # 处理文件路径 相对繁琐 后续化简在下方
     calib_camera_intrinsic_path = os.path.join('single-vehicle-side-example', data_item['calib_camera_intrinsic_path'].replace('/', '\\'))
     if os.path.exists(calib_camera_intrinsic_path):
         with open(calib_camera_intrinsic_path,'r') as file:
@@ -181,6 +181,25 @@ def update_link_data(cursor,data_item,TABLE_NAME):
             #print("label_lidar_std content:",content)
             cursor.execute(update_text_content,(content,item_id))
             print(f"file Id: {item_id} saved successfully")
+    # # 以上四个步骤可以简化为以下函数
+    # update_table_with_file_content(data_item, 'calib_camera_intrinsic', 'calib_camera_intrinsic_path', TABLE_NAME,cursor, item_id)
+    # update_table_with_file_content(data_item, 'calib_lidar_to_camera', 'calib_lidar_to_camera_path', TABLE_NAME, cursor,item_id)
+    # update_table_with_file_content(data_item, 'label_camera_std', 'label_camera_std_path', TABLE_NAME, cursor, item_id)
+    # update_table_with_file_content(data_item, 'label_lidar_std','label_lidar_std_path',TABLE_NAME, cursor, item_id)
+
+# update_link_data中统一处理函数
+def update_table_with_file_content(data_item, column_name, key_in_data_item, table_name, cursor, item_id):
+    # 构建文件路径并替换斜杠
+    file_path = os.path.join('single-vehicle-side-example', data_item[key_in_data_item].replace('/', '\\'))
+    # 检查文件是否存在
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            content = file.read()
+            # 更新文本内容的SQL语句模板
+            update_text_content = f"UPDATE {table_name} SET {column_name}=%s WHERE id=%s"
+            # 执行SQL语句
+            cursor.execute(update_text_content, (content, item_id))
+            # print(f"file Id: {item_id} for {column_name} saved successfully")
 
 # 主程序
 def main():
